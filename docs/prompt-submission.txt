@@ -1,0 +1,38 @@
+Build a working prototype of Dost, a voice-first mobile web app that acts as a friend for older people in India who cannot read English or small text. The user talks and Dost talks back. There is almost nothing to read or tap.
+
+USERS AND LANGUAGES
+Main user: Gangamma, 70, lives in Bengaluru, has diabetes, and speaks only Kannada mixed with English words like "sugar", "BP", "doctor" and "tablet". She speaks slowly, pauses mid-sentence, and often uses loudspeaker. Every step must also work for blind users, with eyes closed. Second user: her son, who sees updates on his own screen.
+Use speech-to-text and text-to-speech that support Kannada and mixed Kannada-English (Sarvam AI Saaras and Bulbul, or equivalents). Dost always replies in Kannada, warmly and informally, like a friend, in short sentences.
+
+SCREENS
+1. Gangamma's screen: one huge round talk button filling the lower half, Dost's face showing listening, thinking or speaking, and a camera button. Large text only as backup.
+2. Son's screen: alerts, and medicines waiting for his approval with an Approve button.
+3. Hidden demo menu: "jump to medicine time", "jump to 8 pm", "simulate no reply".
+
+DATA
+Medicines: name, what it's for ("sugar maatre"), how it looks ("chikka bili gundu", small white round), dose, timing, status (approved or awaiting son). Doctor instructions with date. Report history (date, sugar value). Contacts by relation ("maga" means son). A log of when she spoke today.
+
+VOICE FLOWS
+Flow 1, doctor visit. She says "Doctor jothe maathadu". Dost: "Namaskara doctor, heli." Doctor: "Metformin 500, raatri oota aada mele, mooru tingalu." Dost reads it back: "Metformin 500, raatri oota aada mele, mooru tingalu. Sari na?" Doctor: "Sari." Dost: "Prescription torisi." The camera reads the slip and compares. If they match, Dost asks her to show the tablet once and saves how it looks. The medicine is saved as "awaiting son", and his screen shows the photo, what the doctor said, and Approve.
+
+Flow 2, medicine time. Dost speaks first: "Oota aytha? Eega aa chikka bili gundu maatre tagolli." She holds up a tablet: "Idu sarina?" Dost checks its look and the strip's printed name. Right: "Haudu, adhe." Wrong: "Illa, adu BP maatre. Chikka bili gundu maatre tagolli." She says "tagonde" (I took it), and it's logged. No reply in 15 minutes: remind once more. Still nothing: alert her son.
+
+Flow 3, reading a report. She says "Report nodu." Before reading, Dost finds the paper's edges in the camera and guides her: "swalpa edakke", "swalpa hattira", "kai alladisbedi". When the whole page is in frame and sharp, it takes the photo itself. Then: "Sugar 180 ide, kaleda sala 150 ittu. Sihi kammi maadi."
+
+Flow 4, calling. "Maganige phone maadu." Dost: "Maganige call maadthini," and opens the dialer with her son's number.
+
+Flow 5, quiet day. If Gangamma has not spoken by 8 pm: "Ivattu maatte aadilla, ella sari ideya?" No reply after two tries, 10 minutes apart: alert her son: "Amma ivattu maathadilla, ondu call maadi." Only her voice counts as her talking.
+
+WHEN THINGS GO WRONG
+- Pauses: a pause under 2 seconds is not the end of her turn. Never cut her off.
+- Not understood: never guess. Ask once: "Gottaglilla, innondu sala heli?" Still unclear: offer two choices: "Maatre bagge na, illa maganige call na?"
+- Misheard numbers or medicine names: always read back before saving or acting.
+- Mixed languages: accept Kannada, English and Hindi words in one sentence. Always reply in Kannada.
+- Noise (TV, pressure cooker, other people): ignore sounds shorter than 300 ms. Only Gangamma's enrolled voice can trigger medicine actions or interrupt Dost.
+- Listening sounds: "haa", "hmm", "houdu", "sari" while Dost speaks are not interruptions.
+- Real interruption: stop audio at once, keep in memory only what she actually heard, answer her, then repeat any unfinished medicine instruction in full.
+- Echo on loudspeaker: use echo cancellation. Dost must never react to its own voice.
+- Unclear photo: "Saripaagi kaanistilla, hattira hidi." Never guess a medicine. If tablets look alike, ask for the strip.
+- Medicine not on the prescription: don't confirm it. Tell her son.
+- Health limits: never suggest doses or diagnoses. Only repeat the doctor's instructions and give simple food advice.
+- Slow network: within 300 ms, play a short filler ("hmm, ondu nimisha") while the reply loads. Target reply time: under 1 second.
