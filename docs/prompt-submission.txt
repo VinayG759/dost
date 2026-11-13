@@ -1,38 +1,38 @@
-Build a working prototype of Dost, a voice-first mobile web app that acts as a friend for older people in India who cannot read English or small text. The user talks and Dost talks back. There is almost nothing to read or tap.
+Track: Everyday access. Built by voice with Wispr Flow.
 
-USERS AND LANGUAGES
-Main user: Gangamma, 70, lives in Bengaluru, has diabetes, and speaks only Kannada mixed with English words like "sugar", "BP", "doctor" and "tablet". She speaks slowly, pauses mid-sentence, and often uses loudspeaker. Every step must also work for blind users, with eyes closed. Second user: her son, who sees updates on his own screen.
-Use speech-to-text and text-to-speech that support Kannada and mixed Kannada-English (Sarvam AI Saaras and Bulbul, or equivalents). Dost always replies in Kannada, warmly and informally, like a friend, in short sentences.
+Build Dost, a voice-first PWA — a Kannada-speaking friend for older people in India who cannot read English. She talks, Dost talks back. Nothing on screen needs reading. Camera steps use spoken guidance; blind users describe pills by touch instead.
 
-SCREENS
-1. Gangamma's screen: one huge round talk button filling the lower half, Dost's face showing listening, thinking or speaking, and a camera button. Large text only as backup.
-2. Son's screen: alerts, and medicines waiting for his approval with an Approve button.
-3. Hidden demo menu: "jump to medicine time", "jump to 8 pm", "simulate no reply".
+USERS
+Gangamma, 70, Bengaluru, diabetic. Speaks Kannada mixed with English ("sugar", "BP", "tablet"), older accent ("shugar", "tablate"), sometimes Hindi. Slow speech, mid-sentence pauses, loudspeaker. Doctor: English or Kanglish, interacts with Dost only during visits, no app. Son Ravi: caregiver/payer, separate dashboard on his phone. Dost speaks Kannada to her, English to the doctor. STT/TTS packs are swappable for other Indian languages.
 
-DATA
-Medicines: name, what it's for ("sugar maatre"), how it looks ("chikka bili gundu", small white round), dose, timing, status (approved or awaiting son). Doctor instructions with date. Report history (date, sugar value). Contacts by relation ("maga" means son). A log of when she spoke today.
+DATA MODEL
+Per patient: medicines (name, mg, purpose_kn, visual descriptor, reference photos, meal anchor, dose window minutes, status: approved|awaiting-son), visits (date, instructions[], next check-up), lab values (date, test, value, unit, ref range, previous), contacts (spoken name, relation, phone), enrolled voice profile, learned meal times, interaction log (timestamp, speaker-verified, type).
+Seed: Metformin 500 mg "sugar maatre" "chikka bili gundu" after dinner, 15-min window; Amlodipine 5 mg "BP maatre" "chikka pink" after breakfast; fasting sugar 150 mg/dL; son "maga" Ravi; check-up 15 Feb; dinner 8:30 pm.
+
+SCREENS (two separate devices)
+1. Gangamma: huge talk button (tap anywhere). Camera opens by voice command. Dost's face shows listening/thinking/speaking.
+2. Ravi: medicines awaiting check (photo, doctor's words, Approve/Something's wrong), doses taken/missed, sugar trend. Push notification on every alert and new report.
+3. Demo controls (hidden): jump to 8:45 pm, next day 10 pm, reset. Calls and alerts simulated on Ravi's screen, noted in UI.
+
+SETUP (first use, by the son)
+Adds medicines with photos of tablet and strip, enters meal times, records her voice for speaker verification. Dost proposes a descriptor per medicine; she confirms or corrects.
 
 VOICE FLOWS
-Flow 1, doctor visit. She says "Doctor jothe maathadu". Dost: "Namaskara doctor, heli." Doctor: "Metformin 500, raatri oota aada mele, mooru tingalu." Dost reads it back: "Metformin 500, raatri oota aada mele, mooru tingalu. Sari na?" Doctor: "Sari." Dost: "Prescription torisi." The camera reads the slip and compares. If they match, Dost asks her to show the tablet once and saves how it looks. The medicine is saved as "awaiting son", and his screen shows the photo, what the doctor said, and Approve.
 
-Flow 2, medicine time. Dost speaks first: "Oota aytha? Eega aa chikka bili gundu maatre tagolli." She holds up a tablet: "Idu sarina?" Dost checks its look and the strip's printed name. Right: "Haudu, adhe." Wrong: "Illa, adu BP maatre. Chikka bili gundu maatre tagolli." She says "tagonde" (I took it), and it's logged. No reply in 15 minutes: remind once more. Still nothing: alert her son.
+1. Doctor visit. She says "Doctor jothe maathadu." Dost: "Doctor hattira iddaara?" No or no doctor within 10 seconds: "Doctor hattira iddaaga heli." Doctor speaks; Dost extracts medicines, doses, timing. Reads back in English: "Metformin 500 mg, once after dinner, three months. Correct?" Doctor corrects any parts; Dost updates all and reads the full list again until confirmed. "Show the prescription." Camera reads it; mismatches read aloud, doctor chooses. Doctor gone: mismatches flagged to son. Saved "awaiting son." Ravi's screen: Approve marks approved, Dost tells her; Something's wrong pauses reminders, Dost offers to call him. Unverified reminders say "maga nodthiddaare." Dost never starts, stops or changes a dose on its own.
 
-Flow 3, reading a report. She says "Report nodu." Before reading, Dost finds the paper's edges in the camera and guides her: "swalpa edakke", "swalpa hattira", "kai alladisbedi". When the whole page is in frame and sharp, it takes the photo itself. Then: "Sugar 180 ide, kaleda sala 150 ittu. Sihi kammi maadi."
+2. Medicine time. Anchored to meals: dinner 8:30 triggers "after dinner" at 8:45. Dost speaks first: "Oota aytha?" "Haudu": "Eega aa chikka bili gundu maatre tagolli." "Illa": snooze 20 minutes. She shows a tablet: "Idu sarina?" Dost compares only against her enrolled medicines and the dose due within its window. Right: "Haudu, adhe." Wrong: "Illa, adu BP maatre." Not sure: "Strip torisi." Not in her medicines: "Ee maatre nanage gottilla, Ravi ge heLona?" "Tagonde" logs the dose. No confirmation by 15 min: one reminder. By 30 min: push alert to son. She can initiate anytime — "Idu sarina?" matches whatever is next due.
 
-Flow 4, calling. "Maganige phone maadu." Dost: "Maganige call maadthini," and opens the dialer with her son's number.
+3. Report. "Report nodu." On-device edge detection plays pre-cached cues (no server trip): "swalpa edakke", "hattira", "haan, saaku." Stable one second: auto-capture. "Sugar 180 ide, kaleda sala 150 ittu. Doctor helidru sihi kammi maadi antha." Son gets a push notification with value and trend.
 
-Flow 5, quiet day. If Gangamma has not spoken by 8 pm: "Ivattu maatte aadilla, ella sari ideya?" No reply after two tries, 10 minutes apart: alert her son: "Amma ivattu maathadilla, ondu call maadi." Only her voice counts as her talking.
+4. Calling. "Maganige phone maadu." Dost: "Ravi ge call maadla?" "Haudu": call rings on his phone.
+
+5. Quiet day. Only her enrolled voice counts. No verified voice by 10 pm: "Ivattu maatte aadilla, ella sari ideya?" Two tries, 10 min apart. Then push and call to son: "Amma ivattu maathadilla."
+
+6. Questions and chat. "Doctor enu helidru?" or "Maatre yaavaga?" — only from saved visits and schedule. Not saved: "Nanage gottilla, Ravi ge kelona?" General chat ("Ivattu thanda ide"): warm reply, steers back: "Haa, thanda ide. Maatre tagondra ivattu?"
 
 WHEN THINGS GO WRONG
-- Pauses: a pause under 2 seconds is not the end of her turn. Never cut her off.
-- Not understood: never guess. Ask once: "Gottaglilla, innondu sala heli?" Still unclear: offer two choices: "Maatre bagge na, illa maganige call na?"
-- Misheard numbers or medicine names: always read back before saving or acting.
-- Mixed languages: accept Kannada, English and Hindi words in one sentence. Always reply in Kannada.
-- Noise (TV, pressure cooker, other people): ignore sounds shorter than 300 ms. Only Gangamma's enrolled voice can trigger medicine actions or interrupt Dost.
-- Listening sounds: "haa", "hmm", "houdu", "sari" while Dost speaks are not interruptions.
-- Real interruption: stop audio at once, keep in memory only what she actually heard, answer her, then repeat any unfinished medicine instruction in full.
-- Echo on loudspeaker: use echo cancellation. Dost must never react to its own voice.
-- Unclear photo: "Saripaagi kaanistilla, hattira hidi." Never guess a medicine. If tablets look alike, ask for the strip.
-- Medicine not on the prescription: don't confirm it. Tell her son.
-- Health limits: never suggest doses or diagnoses. Only repeat the doctor's instructions and give simple food advice.
-- Slow network: within 300 ms, play a short filler ("hmm, ondu nimisha") while the reply loads. Target reply time: under 1 second.
+Pauses under 2 seconds: not her turn ending; never cut her off. Not understood: "Gottaglilla, innondu sala heli?" Still unclear: two choices. Low-confidence number or medicine: read back before saving. Mixed Kannada/English/Hindi: fuzzy-match accented words to medicine and medical test names from her list. Noise under 300 ms: ignore. "Haa", "hmm", "houdu" while Dost talks: not interruptions. Real interruption: stop audio instantly, remember only what she heard, answer her, repeat any unfinished medicine instruction fully. Echo cancellation on; Dost ignores its own voice. Blurry photo: "Hattira hidi"; never guess; look-alikes need the strip. Slow network: pre-recorded "hmm, ondu nimisha" within 300 ms. Reply target under one second. Never diagnose or suggest doses.
+
+BUILD
+React PWA developed with Wispr Flow. Sarvam Saarika STT and Bulbul TTS, streaming, speed configurable per user. Claude with tool-calling (get_schedule, log_dose, check_pill, save_prescription, read_report, call_contact, alert_son). On-device OpenCV.js for camera guidance with pre-cached cue clips. FastAPI, Supabase Mumbai.
