@@ -96,6 +96,8 @@ Word limits for Activities 2 and 3 are only "proposed" so far.
 - **Activity 1 (Idea):** submitted 10 Nov, **passed the quality check.** Score shown after 26 Nov. Text in `idea-submission.txt`; the idea itself is in `dost-idea.md`.
 - **Activity 2 (Prompt):** opened 13 Nov. Details below.
 
+- **Activity 3 (Impact):** submitted 21 Nov (`impact-submission.txt`, 462 words). Up to 25 points. **Passed.** Round 1 complete.
+
 ### Activity 2: Prompt (from the submission screen, 13 Nov)
 
 - **Length:** 80 to 800 words. **Due:** 27 Nov (the screen says 27 Nov, although Round 1 is listed as closing 26 Nov; aim for well before either).
@@ -107,7 +109,7 @@ Word limits for Activities 2 and 3 are only "proposed" so far.
   3. **When things go wrong:** noise, accents, mixed languages and misheard input, and what the product does in each case.
   4. **Enough detail to build:** specific enough that two builders would produce nearly the same prototype.
 - **How it's evaluated:** an AI check confirms it's a real prompt someone could give an AI app builder. **Scoring weighs the voice flow most, then handling things going wrong, then how buildable it is. Up to 50 points** toward the Round 1 total. Passing unlocks Activity 3 on 20 Nov.
-- **Draft:** `prompt-submission.txt` (723 words).
+- **Submitted 14 Nov 2026** (`prompt-submission.txt`, 788 words, checked against `decisions.md`). Quality check result: not yet recorded.
 - An AI quality check reads it on submit and gives feedback; edit and resubmit if it needs changes.
 
 ## Round 2: The build (online), 27–29 Nov

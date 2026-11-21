@@ -1,0 +1,18 @@
+Who benefits, and roughly how many: Older Indians who manage a long-term illness alone and cannot read English, and the families who worry about them. India has over 100 million people aged 60 and above, heading to about 230 million by 2036 (PIB, 2025). 13.2% of them have diabetes (LASI), roughly 20 million people by our estimate, and Karnataka is among the states above 10% (ICMR-INDIAB, Lancet 2023). About 1 in 7 Indians over 50 has a visual impairment (National Blindness Survey 2015-19), so the small print on strips and reports fails them too. Behind each of them is a son or daughter like Gangamma's, out at work all day, who also benefits from knowing she is fine. We start with Kannada-speaking families in Bengaluru, then other Indian languages.
+
+What changes compared with today:
+- Today the doctor's instructions are forgotten by evening. With Dost, the doctor tells Dost, and she can ask "Doctor enu helidru?" any time.
+- Today she mixes up tablets by colour. With Dost, she shows the tablet and asks "Idu sarina?" before swallowing it.
+- Today reports sit in a drawer. With Dost, each report is read aloud in Kannada and compared with the last one.
+- Today her son hears about a missed dose late, or never. With Dost, he gets an alert within 30 minutes and a summary every night.
+- Today a silent day goes unnoticed. With Dost, a quiet day brings a check-in, then a call to her son.
+In a study of older diabetics in Dakshina Kannada, about 28% were not fully adherent to their medicines (Cureus, 2023). Their days change the most.
+
+How we'd know it worked: an 8-week pilot with Gangamma and 20 Bengaluru families, measured from Dost's own logs:
+- Doses confirmed on time: from the first week's level to 90% or more.
+- Wrong-tablet catches: every "Illa, adu BP maatre" is a mistake prevented, and we count each one.
+- Doctor's instructions: Dost's answer to "Doctor enu helidru?" matches the prescription every time, checked by the son.
+- Trust: she talks to Dost on at least 6 of 7 days by week 4.
+- Value: at least half of the sons and daughters say they would pay a monthly fee to keep it.
+
+The main risk: Dost confirming the wrong tablet or mishearing a dose, because a mistake here harms health. So Dost never guesses. It reads numbers back, checks the printed strip when tablets look alike, never changes a dose, and sends every new medicine to the son for approval. The second risk is trust: an older person may not talk to a phone at first. That is why Dost speaks her own language like a friend, and why the pilot measures daily use before anything else.
